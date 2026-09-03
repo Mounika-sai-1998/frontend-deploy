@@ -116,7 +116,7 @@ resource "aws_autoscaling_group" "frontend" {
     id      = aws_launch_template.frontend.id
     version = "$Latest"
   }
-  vpc_zone_identifier       = split(",", data.aws_ssm_parameter.public_subnet_ids.value)
+  vpc_zone_identifier       = split(",", data.aws_ssm_parameter.public_subnet_id.value)
 
   instance_refresh {
     strategy = "Rolling"
