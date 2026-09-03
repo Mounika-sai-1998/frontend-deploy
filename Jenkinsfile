@@ -60,12 +60,13 @@ pipeline {
             }
         }
         stage('Destroy') {
-            }
+            
             when {
                 expression {
                     params.action == "Destroy"
                 }
-            eps {
+            }
+            steps {
                 sh """
                     cd terraform
                     terraform destroy --auto-approve -var="app_version=${params.appVersion}" 
