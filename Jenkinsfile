@@ -10,7 +10,7 @@ pipeline {
     }
     parameters {
         string(name: 'appVersion', defaultValue: '1.0.0', description: 'what is application version?')
-        choice(name: 'action', choices: ['Apply', 'Destroy'], description: 'Pick something')
+        //choice(name: 'action', choices: ['Apply', 'Destroy'], description: 'Pick something')
     }
     environment {
         def appVersion = ''
@@ -33,11 +33,11 @@ pipeline {
             }
         }
         stage('Plan') {
-            when {
-                expression {
-                    params.action == "Apply"
-                }
-            }
+            // when {
+            //     expression {
+            //         params.action == "Apply"
+            //     }
+            // }
             steps {
                 sh """
                     pwd
@@ -47,11 +47,11 @@ pipeline {
             }
         }
         stage('Apply') {
-            when {
-                expression {
-                    params.action == "Apply"
-                }
-            }
+            // when {
+            //     expression {
+            //         params.action == "Apply"
+            //     }
+            // }
             steps {
                 sh """
                     cd terraform
@@ -59,20 +59,20 @@ pipeline {
                 """
             }
         }
-        stage('Destroy') {
+        // stage('Destroy') {
             
-            when {
-                expression {
-                    params.action == "Destroy"
-                }
-            }
-            steps {
-                sh """
-                    cd terraform
-                    terraform destroy --auto-approve -var="app_version=${params.appVersion}" 
-                """
-            }
-        }
+        //     when {
+        //         expression {
+        //             params.action == "Destroy"
+        //         }
+        //     }
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform destroy --auto-approve -var="app_version=${params.appVersion}" 
+        //         """
+        //     }
+        // }
     }
         
     post {
